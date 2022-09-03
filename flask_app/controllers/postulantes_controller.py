@@ -24,7 +24,7 @@ def register_p():
         "telefono2": request.form['telefono2']
     }
     id = Postulante.save(formulario) #Guardando a mi usuario y recibo el ID del nuevo registro
-    session['usuarios_id'] = id #Guardando en sesion el identificador
+    session['postulantes_id'] = id #Guardando en sesion el identificador
 
     return redirect('/dashboard')
 
@@ -32,10 +32,8 @@ def register_p():
 
 @app.route('/dashboard')
 def dashboard():
-    if 'usuario_id' not in session:
-        return redirect('/convocatoria')
     formulario = {
-        "id": session['usuario_id']
+        "id": session['postulantes_id']
     }
     postulante = Postulante.get_by_id(formulario)
 

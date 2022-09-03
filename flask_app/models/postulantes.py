@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash #mandar mensajes a la plantilla
+from flask import flash
 
 class Postulante:
 

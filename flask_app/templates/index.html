@@ -10,17 +10,18 @@
 <body>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Menu</a>
+            <a class="navbar-brand" href="#">Menú</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="/flask_app/templates/index.html">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/convocatoria.html">Convocatoria</a>
+                    <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/convocatoria">Convocatoria</a>
                     {% if session['perfil_id'] == 0 %}
-                    <a class="nav-item nav-link" href="/flask_app/templates/produccion.html">Producción</a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/compras.html">Compras</a>
+                    <a class="nav-item nav-link" href="/produccion">Producción</a>
+                    <a class="nav-item nav-link" href="/compras">Compras</a>
+                    <a class="nav-item nav-link" href="/info_postulantes">Info postulantes</a>
                     {% endif %}
             </div>
         </nav>

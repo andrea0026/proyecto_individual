@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>info postulantes</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Menú</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/flask_app/templates/index.html">Home </a>
+                <a class="nav-item nav-link" href="/flask_app/templates/convocatoria.html">Convocatoria</a>
+                <a class="nav-item nav-link" href="/flask_app/templates/produccion.html">Producción</a>
+                <a class="nav-item nav-link" href="/flask_app/templates/compras.html">Compras</a>
+                <a class="nav-item nav-link" href="/flask_app/templates/info_postulantes.html">Info postulantes <span class="sr-only">(current)</span></a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+  <h2>Listado de personas postuladas</h2>            
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Identificación</th>
+        <th>Telefono1</th>
+        <th>Telefono2</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for postulante in postulantes %}
+        <tr>
+            <td>{{postulante.nombre | upper}}</td>
+            <td>{{postulante.apellido | upper}}</td>
+            <td>{{postulante.identificacion | upper}}</td>
+            <td>{{postulante.telefono1 | upper}}</td>
+            <td>{{postulante.telefono2 | upper}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

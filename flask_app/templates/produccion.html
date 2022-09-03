@@ -10,17 +10,19 @@
 <body>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Menu</a>
+            <a class="navbar-brand" href="#">Menú</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="/flask_app/templates/index.html">Home</a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/convocatoria.html">Convocatoria</a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/produccion.html">Producción <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/compras.html">Compras</a>
-                </div>
+                    <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/convocatoria">Convocatoria</a>
+                    {% if session['perfil_id'] == 0 %}
+                    <a class="nav-item nav-link" href="/produccion">Producción</a>
+                    <a class="nav-item nav-link" href="/compras">Compras</a>
+                    <a class="nav-item nav-link" href="/info_postulantes">Info postulantes</a>
+                    {% endif %}
             </div>
         </nav>
     </div>
@@ -34,7 +36,7 @@
                 <h2>Registrar producción</h2>
                 <!--Realizar validacion con ajax-->
 
-                <form action="/register_p" method="post"> <!--cambiar el action por el metodo correspondiente-->
+                <form action="/crear/registro" method="post"> <!--cambiar el action por el metodo correspondiente-->
                     <div class="form-group">
                         <label for="fecha_p">Fecha:</label>
                         <input type="date" id="fecha_p" name="fecha_p" class="form-control">
@@ -49,25 +51,21 @@
                 <h2>Reporte:</h2>
                 <h3>Total kilos recolectados en el mes</h3>
                 <div>
-                    <label for="startDate">Mes :</label>
-                    <input name="startDate" id="startDate" class="date-picker" />
+                    <label for="fecha_p">Mes :</label>
+                    <input name="fecha_p" id="fecha_p" class="date-picker" />
                 </div>
                 <input type="submit" value="mostar" class="btn btn-primary">
                 <br>
-                
-                    <div class="card-body">
-                        <h2 class="card-title">Total kilogramos</h2>
-                        {% for cantidad in cantidad_p %}
-                            <p class="card-text"><a href="/produccion/{{suma}}">{{cantidad.suma}}</a></p>
-                        {% endfor %}
-                    </div>
-                
+                <div class="card-body">
+                    <h2 class="card-title">Total kilogramos</h2>
+                    <p class="card-text"><a href="/produccion/{{suma}}">{{suma}}</a></p>
+                </div>
             </div>
             <div class="col-6">
                 <h2>Registrar ventas</h2>
                 <!--Realizar validacion con ajax-->
 
-                <form action="/login" method="post"> <!--cambiar el action por el metodo correspondiente-->
+                <form action="/registrar/ventas" method="post">
                     <div class="form-group">
                         <label for="fecha_v">Fecha:</label>
                         <input type="date" id="fecha_v" name="fecha_v" class="form-control">
@@ -93,15 +91,12 @@
                     <label for="startDate">Mes :</label>
                     <input name="startDate" id="startDate" class="date-picker" />
                 </div>
-                <input type="submit" value="mostar" class="btn btn-primary">
-                <br>
-                
-                    <div class="card-body">
-                        <h2 class="card-title">Total $ ventas:</h2>
-                        {% for valor in total_ingresos %}
-                            <p class="card-text"><a href="/produccion/{{suma_ventas}}">{{cantidad.suma}}</a></p>
-                        {% endfor %}
-                    </div>
+                <input type="submit" value="mostrar" class="btn btn-primary">
+                <br>   
+                <div class="card-body">
+                    <h2 class="card-title">Total $ ventas:</h2>
+                    <p class="card-text"><a href="/produccion/{{suma_ventas}}">{{ cantidadTotal }}</a></p>
+                </div>
             </div>
         </div>
     </div>

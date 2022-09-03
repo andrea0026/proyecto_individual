@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productividad y ventas</title>
+    <title>Gastos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Menu</a>
+            <a class="navbar-brand" href="#">Menú</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -20,6 +20,7 @@
                     <a class="nav-item nav-link" href="/flask_app/templates/convocatoria.html">Convocatoria</a>
                     <a class="nav-item nav-link" href="/flask_app/templates/produccion.html">Producción</a>
                     <a class="nav-item nav-link" href="/flask_app/templates/compras.html">Compras<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/flask_app/templates/info_postulantes.html">Info postulantes</a>
                 </div>
             </div>
         </nav>
@@ -34,14 +35,14 @@
                 <h2>Crear insumos</h2>
                 <!--Realizar validacion con ajax-->
 
-                <form action="/register_p" method="post"> <!--cambiar el action por el metodo correspondiente-->
+                <form action="/crear/compra" method="post">
                     <div class="form-group">
                         <label for="Nombre_in">Nombre insumo</label>
                         <input type="text" id="Nombre_in" name="Nombre_in" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="und_medida">unidad de medida</label>
-                        <input type="text" name="und_medida" id="und_medida" class="form-control">
+                        <input type="text" name="und_medida" id="und_medida" class="form-control" placeholder="kg/unidad/litros">
                     </div>
                     <input type="submit" value="Guardar" class="btn btn-primary">
                 </form>
@@ -49,55 +50,58 @@
                 <h2>Gastos - compras:</h2>
                 <form action="/register_p" method="post"> <!--cambiar el action por el metodo correspondiente-->
                     <div class="form-group">
-                        <label for="Nombre_in">fecha</label>
-                        <input type="text" id="Nombre_in" name="Nombre_in" class="form-control">
+                        <label for="fecha_g">Fecha:</label>
+                        <input type="date" id="fecha_g" name="fecha_g" class="form-control">
+                    </div>
+                    <input type="hidden" name="user_id" value="{{user.id}}">
+                    <div class="form-group">
+                        <label for="insumos">insumo...</label> <!--crear variable insumos y traer la lista de los insumos-->
+                        <input type="text" name="insumos" id="insumos" class="form-control" value="{{insumos.nombre_in}}">
                     </div>
                     <div class="form-group">
-                        <label for="und_medida">insumo...</label>
-                        <input type="text" name="und_medida" id="und_medida" class="form-control">
+                        <label for="concepto">Concepto</label>
+                        <input type="text" name="concepto" id="concepto" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="valor">Valor</label>
+                        <input type="number" name="valor" id="valor" class="form-control">
                     </div>
                     <input type="submit" value="Guardar" class="btn btn-primary">
                 </form>
             </div>
             <div class="col-6">
-                <h2>Listado de insumos</h2>
-                <!--Realizar validacion con ajax-->
-
-                <form action="/login" method="post"> <!--cambiar el action por el metodo correspondiente-->
-                    <div class="form-group">
-                        <label for="fecha_v">Fecha:</label>
-                        <input type="date" id="fecha_v" name="fecha_v" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="cantidad_v">Cantidad vendida (kg)</label>
-                        <input type="number" name="cantidad_v" id="cantidad_v" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="cantidad_v">Precio del kilo ($)</label>
-                        <input type="number" name="valor_kilo" id="valor_kilo" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="cantidad_v">Total venta ($)</label>
-                        <input type="number" name="total_venta" id="total_venta" class="form-control">
-                    </div>
-                    <input type="submit" value="Guardar" class="btn btn-primary" >
-                </form>
+                <h2>Listado de insumos:</h2>
+                <tbody class="align-middle">
+                    {% for insumo in insumos %}
+                        <tr>
+                            <td>{{insumo.nombre_in | upper}}</td>
+                            <th>{{insumo.und_medida | upper}}</th>
+                            <td class="">
+                                <a class="btn btn-sm btn-primary m-1" href="/insumo/editar/{{insumo.id}}"><span title="Editar"><i class="fas fa-edit fa-fw"></i></span></a>
+                                <a class="btn btn-sm btn-danger  m-1" href="/insumo/eliminar/{{insumo.id}}"><span title="Eliminar"><i class="fas fa-trash fa-fw"></i></span></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
                 <br>
                 <h2>Reporte:</h2>
                 <h3>Gastos versus ingresos</h3>
                 <div>
-                    <label for="startDate">Mes :</label>
+                    <label for="startDate">Mes:</label>
                     <input name="startDate" id="startDate" class="date-picker" />
                 </div>
-                <input type="submit" value="mostar" class="btn btn-primary">
-                <br>
-                
-                    <div class="card-body">
-                        <h2 class="card-title">Total $ ventas:</h2>
-                        {% for valor in total_ingresos %}
-                            <p class="card-text"><a href="/produccion/{{suma_ventas}}">{{cantidad.suma}}</a></p>
-                        {% endfor %}
-                    </div>
+                <input type="submit" value="mostrar" class="btn btn-primary">
+                <br>  
+                <div class="card-body">
+                    <h2 class="card-title">Total $ ventas:</h2>
+                    {% for valor in total_ingresos %}
+                        <p class="card-text"><a href="/produccion/{{suma_ventas}}">{{cantidad.suma}}</a></p>
+                    {% endfor %}
+                    <h2 class="card-title">Total $ gastos:</h2>
+                    {% for valor in total_gastos %}
+                        <p class="card-text"><a href="/compras/{{suma_compras}}">{{cantidad.suma_compras}}</a></p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

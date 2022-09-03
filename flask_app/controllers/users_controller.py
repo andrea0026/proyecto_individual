@@ -41,6 +41,7 @@ def login():
     if not user: #si user=False
         flash("E-mail no encontrado", 'login')
         return redirect('/')
+    
     #Comparando la contraseña encriptada con la contraseña del LOGIN
     if not bcrypt.check_password_hash(user.password, request.form['password']):
         flash("Password incorrecto", 'login')
