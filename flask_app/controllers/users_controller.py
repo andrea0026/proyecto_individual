@@ -48,6 +48,7 @@ def login():
         return redirect('/')
     session['user_id'] = user.id
     session['perfil_id'] = user.perfil
+    session['nombreUsuario'] = user.nombre
 
     return redirect('/produccion')
 

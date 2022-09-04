@@ -11,7 +11,7 @@ class Compra:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
-        self.insumo_id = data['insumo_id']
+        self.id_insumo = data['id_insumo']
         self.suma = data['suma']
 
     @staticmethod
@@ -28,6 +28,7 @@ class Compra:
     @classmethod
     def save(cls, formulario):
         query = "INSERT INTO gastos (fecha_g, concepto, valor) VALUES ( %(fecha_g)s, %(concepto)s, %(valor)s)"
+        print(query)
         result = connectToMySQL('proyecto_dojo').query_db(query, formulario)
         return result
 

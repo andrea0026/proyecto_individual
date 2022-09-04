@@ -16,13 +16,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="/">Home</a>
                     <a class="nav-item nav-link" href="/convocatoria">Convocatoria</a>
                     {% if session['perfil_id'] == 0 %}
                     <a class="nav-item nav-link" href="/produccion">Producción</a>
                     <a class="nav-item nav-link" href="/compras">Compras</a>
                     <a class="nav-item nav-link" href="/info_postulantes">Info postulantes</a>
                     {% endif %}
+                </div>
             </div>
         </nav>
     </div>

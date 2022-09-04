@@ -30,7 +30,8 @@ class Insumo:
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM insumos;" 
+        query = "SELECT * FROM insumos" 
+        print(query)
         results = connectToMySQL('proyecto_dojo').query_db(query) 
         insumos = []
         for insumo in results:

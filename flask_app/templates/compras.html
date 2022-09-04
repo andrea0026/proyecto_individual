@@ -16,17 +16,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="/flask_app/templates/index.html">Home</a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/convocatoria.html">Convocatoria</a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/produccion.html">Producción</a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/compras.html">Compras<span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/flask_app/templates/info_postulantes.html">Info postulantes</a>
+                    <a class="nav-item nav-link active" href="/">Home</a>
+                    <a class="nav-item nav-link" href="/convocatoria">Convocatoria</a>
+                    {% if session['perfil_id'] == 0 %}
+                    <a class="nav-item nav-link" href="/produccion">Producción</a>
+                    <a class="nav-item nav-link" href="/compras">Compras</a>
+                    <a class="nav-item nav-link" href="/info_postulantes">Info postulantes</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>
     </div>
     <div class="container">
-        <h1>Bienvenid@ {{user.nombre}} </h1>
+        <h1>Bienvenid@  {{nombreUser}}</h1>
         <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
     </div> 
     <div class="container">
@@ -35,10 +37,10 @@
                 <h2>Crear insumos</h2>
                 <!--Realizar validacion con ajax-->
 
-                <form action="/crear/compra" method="post">
+                <form action="/crear/insumo" method="post">
                     <div class="form-group">
-                        <label for="Nombre_in">Nombre insumo</label>
-                        <input type="text" id="Nombre_in" name="Nombre_in" class="form-control">
+                        <label for="nombre_in">Nombre insumo</label>
+                        <input type="text" id="nombre_in" name="nombre_in" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="und_medida">unidad de medida</label>
@@ -48,15 +50,15 @@
                 </form>
                 <br>
                 <h2>Gastos - compras:</h2>
-                <form action="/register_p" method="post"> <!--cambiar el action por el metodo correspondiente-->
+                <form action="/crear/compra" method="post"> <!--cambiar el action por el metodo correspondiente-->
                     <div class="form-group">
                         <label for="fecha_g">Fecha:</label>
                         <input type="date" id="fecha_g" name="fecha_g" class="form-control">
                     </div>
-                    <input type="hidden" name="user_id" value="{{user.id}}">
+                    <input type="hidden" name="user_id" value="{{userId}}">
                     <div class="form-group">
                         <label for="insumos">insumo...</label> <!--crear variable insumos y traer la lista de los insumos-->
-                        <input type="text" name="insumos" id="insumos" class="form-control" value="{{insumos.nombre_in}}">
+                        <input type="text" name="insumos" id="insumos" class="form-control" value="{{nombre_in}}">
                     </div>
                     <div class="form-group">
                         <label for="concepto">Concepto</label>
@@ -71,18 +73,25 @@
             </div>
             <div class="col-6">
                 <h2>Listado de insumos:</h2>
-                <tbody class="align-middle">
-                    {% for insumo in insumos %}
+                <table>
+                    <thead>
+                        <th>Insumo</th>
+                        <th>Unidad medida</th>
+                    </thead>
+                
+                    <tbody class="align-middle">
+                        {% for insumo in insumos %}
                         <tr>
-                            <td>{{insumo.nombre_in | upper}}</td>
-                            <th>{{insumo.und_medida | upper}}</th>
+                            <td>{{ insumo }}</td>
+                            <td>{{ insumo }}</td>
                             <td class="">
-                                <a class="btn btn-sm btn-primary m-1" href="/insumo/editar/{{insumo.id}}"><span title="Editar"><i class="fas fa-edit fa-fw"></i></span></a>
-                                <a class="btn btn-sm btn-danger  m-1" href="/insumo/eliminar/{{insumo.id}}"><span title="Eliminar"><i class="fas fa-trash fa-fw"></i></span></a>
+                                <a class="btn btn-sm btn-success m-1" href="/insumo/editar/{{insumo}}"><span title="Editar">Editar<i class="fas fa-edit fa-fw"></i></span></a>
+                                <a class="btn btn-sm btn-danger  m-1" href="/insumo/eliminar/{{insumo}}"><span title="Eliminar">Eliminar<i class="fas fa-trash fa-fw"></i></span></a>
                             </td>
                         </tr>
-                    {% endfor %}
-                </tbody>
+                        {% endfor %}
+                    </tbody>
+                </table>
                 <br>
                 <h2>Reporte:</h2>
                 <h3>Gastos versus ingresos</h3>
