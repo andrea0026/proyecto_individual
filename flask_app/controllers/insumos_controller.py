@@ -17,9 +17,9 @@ def crear_insumo():
 @app.route('/borrar/insumo/<int:id>')
 def borrar_insumo(id):
     if 'user_id' not in session: #Solo puede ver la página si ya inició sesión 
-        return redirect('/index')
+        return redirect('/compras')
     
     formulario = {"id": id}
     Insumo.delete(formulario)
 
-    return redirect('/compras.html')
+    return redirect('/compras')

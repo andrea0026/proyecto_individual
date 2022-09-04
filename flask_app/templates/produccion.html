@@ -65,7 +65,7 @@
                 <h2>Registrar ventas</h2>
                 <!--Realizar validacion con ajax-->
 
-                <form action="/registrar/ventas" method="post">
+                <form action="/crear/venta" method="post">
                     <div class="form-group">
                         <label for="fecha_v">Fecha:</label>
                         <input type="date" id="fecha_v" name="fecha_v" class="form-control">
@@ -95,7 +95,7 @@
                 <br>   
                 <div class="card-body">
                     <h2 class="card-title">Total $ ventas:</h2>
-                    <p class="card-text"><a href="/produccion/{{suma_ventas}}">{{ cantidadTotal }}</a></p>
+                    <p class="card-text"><a href="/produccion/{{sumaVentas}}">{{ cantidadTotal }}</a></p>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from flask_app.models.insumos import Insumo
 
 class Compra:
 
@@ -54,3 +55,8 @@ class Compra:
         result = connectToMySQL("proyecto_dojo").query_db(query,formulario)
         compra = cls(result[0])
         return compra
+
+    @classmethod
+    def get_all_insumos(cls):
+        all_insumos = Insumo.get_all()
+        return all_insumos

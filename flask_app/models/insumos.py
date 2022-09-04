@@ -31,11 +31,12 @@ class Insumo:
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM insumos" 
-        print(query)
         results = connectToMySQL('proyecto_dojo').query_db(query) 
         insumos = []
+        print("get all")
         for insumo in results:
-            insumo.append(cls(insumo))
+            print(insumo)
+            insumos.append(cls(insumo))
         return insumos
 
     @classmethod
