@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app.models.insumos import Insumo
+from datetime import date
 
 class Compra:
 
@@ -28,7 +29,7 @@ class Compra:
 
     @classmethod
     def save(cls, formulario):
-        query = "INSERT INTO gastos (fecha_g, concepto, valor) VALUES ( %(fecha_g)s, %(concepto)s, %(valor)s)"
+        query = "INSERT INTO gastos (fecha_g, concepto, valor,id_insumo) VALUES ( %(fecha_g)s, %(concepto)s, %(valor)s,%(id_insumo)s)"
         print(query)
         result = connectToMySQL('proyecto_dojo').query_db(query, formulario)
         return result
@@ -60,3 +61,35 @@ class Compra:
     def get_all_insumos(cls):
         all_insumos = Insumo.get_all()
         return all_insumos
+
+    @classmethod
+    def get_ventas_mes(cls):
+        today = date.today()
+
+        mount = today.strftime("%m")
+        year = today.strftime("%Y")
+        query  = "SELECT * FROM ventas WHERE MONTH(fecha_v) = " + mount + " AND YEAR(fecha_v) = " + year + ";"
+        result = connectToMySQL("proyecto_dojo").query_db(query)
+        suma = 0
+
+        for row in result:
+            suma += row['total_venta']
+    
+        return suma
+
+    @classmethod
+    def get_gastos_mes(cls):
+        today = date.today()
+
+        mount = today.strftime("%m")
+        year = today.strftime("%Y")
+        query  = "SELECT * FROM gastos WHERE MONTH(fecha_g) = " + mount + " AND YEAR(fecha_g) = " + year + ";"
+        print(query)
+        result = connectToMySQL("proyecto_dojo").query_db(query)
+        suma = 0
+
+        for row in result:
+            suma += row['valor']
+    
+        return suma
+    

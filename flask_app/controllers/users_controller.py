@@ -53,16 +53,8 @@ def login():
     return redirect('/produccion')
 
 #-----------------------------------------------
-@app.route('/produccion')
-def produccion():
-    if 'user_id' not in session:
-        return redirect('/')
-    formulario = {
-        "id": session['user_id']
-    }
-    user = User.get_by_id(formulario)
 
-    return render_template('produccion.html', user=user)
+
 
 #-----------------------------------------------
 @app.route('/logout')

@@ -32,16 +32,15 @@
             <h2>Editar insumo</h2>
             <a href="/flask_app/templates/compras.html" class="btn btn-success">Volver</a>
         </header>
-        <form action="/editar/insumo" method="post">
-            <input type="hidden" name="user_id" value="{{user.id}}">
+        <form action="/editar/insumo" method="POST">
             <input type="hidden" name="id" value="{{insumo.id}}" >
             <div class="form-group">
-                <label for="nombre_in">Nombre</label>
+                <label for="nombre_in">Nombre insumo</label>
                 <input type="text" id="nombre_in" name="nombre_in" class="form-control" value="{{insumo.nombre_in}}">
             </div>
             <div class="form-group">
                 <label for="und_medida">unidad de medida</label>
-                <textarea class="form-control" id="und_medida" name="und_medida">{{insumo.und_medida}}</textarea>
+                <input type="text" name="und_medida" id="und_medida" class="form-control" value="{{insumo.und_medida}}">
             </div>
             <input type="submit" class="btn btn-primary" value="Guardar">
         </form>

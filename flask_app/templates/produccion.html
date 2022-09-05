@@ -49,17 +49,13 @@
                 </form>
                 <br>
                 <h2>Reporte:</h2>
-                <h3>Total kilos recolectados en el mes</h3>
+                <h3>Total kilos recolectados en el mes actual</h3>
                 <div>
-                    <label for="fecha_p">Mes :</label>
-                    <input name="fecha_p" id="fecha_p" class="date-picker" />
+                    <label for="fecha_p"> Consolidado mes : {{cantidadTotal}} kg</label>
                 </div>
-                <input type="submit" value="mostar" class="btn btn-primary">
+                
                 <br>
-                <div class="card-body">
-                    <h2 class="card-title">Total kilogramos</h2>
-                    <p class="card-text"><a href="/produccion/{{suma}}">{{suma}}</a></p>
-                </div>
+                
             </div>
             <div class="col-6">
                 <h2>Registrar ventas</h2>
@@ -88,15 +84,9 @@
                 <h2>Reporte:</h2>
                 <h3>Total de las ventas realizadas en el mes:</h3>
                 <div>
-                    <label for="startDate">Mes :</label>
-                    <input name="startDate" id="startDate" class="date-picker" />
+                    <label for="startDate">Consolidado mes $ {{ totalVentas }}</label>
                 </div>
-                <input type="submit" value="mostrar" class="btn btn-primary">
                 <br>   
-                <div class="card-body">
-                    <h2 class="card-title">Total $ ventas:</h2>
-                    <p class="card-text"><a href="/produccion/{{sumaVentas}}">{{ cantidadTotal }}</a></p>
-                </div>
             </div>
         </div>
     </div>

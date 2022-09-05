@@ -10,7 +10,7 @@ def inicializacionVentas(cantidadTotal):
 @app.route('/crear/venta', methods=['POST'])
 def crear_venta():
     if 'user_id' not in session: #Solo puede ver la página si ya inició sesión 
-        return redirect('/index')
+        return redirect('/')
     
     #validacion
     if not Venta.validacion(request.form): 

@@ -46,3 +46,13 @@ class Postulante:
         result = connectToMySQL('proyecto_dojo').query_db(query, formulario) #Select recibe lista
         postulante = cls(result[0])
         return postulante
+        
+
+    @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM postulantes"
+        results = connectToMySQL('proyecto_dojo').query_db(query) 
+        postulantes = []
+        for postulante in results:
+            postulantes.append(cls(postulante))
+        return postulantes

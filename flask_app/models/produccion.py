@@ -1,5 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from flask_app.models.users import User
+from datetime import date
 
 class Produccion:
 
@@ -52,3 +54,45 @@ class Produccion:
         result = connectToMySQL("proyecto_dojo").query_db(query,formulario)
         un_producto = cls(result[0])
         return un_producto
+
+    @classmethod
+    def get_user_by_id(cls,id_user):
+
+        formulario = {
+            "id": id_user
+        }
+        user = User.get_by_id(formulario)
+        return user
+
+    @classmethod
+    def get_produccion_mes(cls):
+        today = date.today()
+
+        mount = today.strftime("%m")
+        year = today.strftime("%Y")
+        query  = "SELECT cantidad_p FROM produccion WHERE MONTH(fecha_p) = " + mount + " AND YEAR(fecha_p) = " + year + ";"
+        result = connectToMySQL("proyecto_dojo").query_db(query)
+        suma = 0
+        
+        for row in result:
+            suma += row['cantidad_p']
+        return suma
+
+    @classmethod
+    def get_ventas_mes(cls):
+        today = date.today()
+
+        mount = today.strftime("%m")
+        year = today.strftime("%Y")
+        query  = "SELECT * FROM ventas  WHERE MONTH(fecha_v) = " + mount + " AND YEAR(fecha_v) = " + year + ";"
+        print(query)
+        result = connectToMySQL("proyecto_dojo").query_db(query)
+        suma = 0
+
+        for row in result:
+            suma += row['total_venta']
+    
+        return suma
+
+
+

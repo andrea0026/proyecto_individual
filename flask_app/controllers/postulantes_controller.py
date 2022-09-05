@@ -2,7 +2,7 @@ from flask import render_template, redirect, session, request, flash #importacio
 from flask_app import app
 from flask_app.models.postulantes import Postulante
 
-@app.route('/')
+@app.route('/convocatoria')
 def convocatoria():
     return render_template('convocatoria.html')
 
@@ -38,4 +38,31 @@ def dashboard():
     postulante = Postulante.get_by_id(formulario)
 
     return render_template('dashboard.html', postulante=postulante)
+
+#-----------------------------------------------
+
+@app.route('/info_postulantes') #A través de la URL recibimos el ID del postulante
+def ver_postulantes():
+    if 'user_id' not in session: #Solo puede ver la página si ya inició sesión 
+        return redirect('/')
+
+
+    #llamar a una función y debo de recibir al postulante
+    postulantes = Postulante.get_all()
+
+    return render_template('info_postulantes.html',postulantes=postulantes)
+
+
+#-----------------------------------------------
+
+@app.route('/ver/postulantes/<int:id>') #A través de la URL recibimos el ID del postulante
+def ver_postulante(id):
+    if 'user_id' not in session: #Solo puede ver la página si ya inició sesión 
+        return redirect('/')
+
+    formulario_p = { "id": id }
+    #llamar a una función y debo de recibir al postulante
+    postulante = Postulante.get_by_id(formulario_p)
+
+    return render_template('info_postulantes.html', postulante=postulante)
 

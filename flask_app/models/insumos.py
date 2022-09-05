@@ -33,9 +33,7 @@ class Insumo:
         query = "SELECT * FROM insumos" 
         results = connectToMySQL('proyecto_dojo').query_db(query) 
         insumos = []
-        print("get all")
         for insumo in results:
-            print(insumo)
             insumos.append(cls(insumo))
         return insumos
 
@@ -43,12 +41,13 @@ class Insumo:
     def get_by_id(cls, formulario): 
         query = "SELECT * FROM insumos WHERE insumos.id = %(id)s" 
         result = connectToMySQL('proyecto_dojo').query_db(query, formulario) 
-        insumo = cls(result[0]) 
+        insumo = cls(result[0])
         return insumo
 
     @classmethod
     def update(cls, formulario):
         query = "UPDATE insumos SET nombre_in = %(nombre_in)s, und_medida = %(und_medida)s WHERE id = %(id)s"
+        print(query)
         result = connectToMySQL('proyecto_dojo').query_db(query, formulario)
         return result
 
