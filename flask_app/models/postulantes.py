@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask import flash,jsonify
 
 class Postulante:
 
@@ -24,19 +24,23 @@ class Postulante:
         es_valido = True
         
         if len(formulario['nombre']) < 3:
-            flash('Nombre debe de tener al menos 3 caracteres', 'registro')
+            #flash('Nombre debe de tener al menos 3 caracteres', 'registro')
+            return jsonify(message='Nombre debe de tener al menos 3 caracteres')
             es_valido = False
         
         if len(formulario['apellido']) < 3:
-            flash('Apellido debe de tener al menos 3 caracteres', 'registro')
+            #flash('Apellido debe de tener al menos 3 caracteres', 'registro')
+            return jsonify(message='Apellido debe de tener al menos 3 caracteres')
             es_valido = False
         
-        if len(formulario['identificacion']) < 8:
-            flash('La identificación debe de tener al menos 8 caracteres', 'registro')
+        if len(formulario['identificacion']) < 6:
+            #flash('La identificación debe de tener al menos 6 caracteres', 'registro')
+            return jsonify(message='La identificación debe tener al menos 6 caracteres')
             es_valido = False
 
         if len(formulario['telefono1']) < 10:
-            flash('El teléfono celular debe de tener al menos 10 caracteres', 'registro')
+            #flash('El teléfono celular debe de tener al menos 10 caracteres', 'registro')
+            return jsonify(message='El teléfono celular debe de tener al menos 10 caracteres')
             es_valido = False
         return es_valido
 

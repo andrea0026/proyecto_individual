@@ -35,8 +35,15 @@
         <div class="row">
             <div class="col-6">
                 <h2>Crear insumos</h2>
-                <!--Realizar validacion con ajax-->
-
+                {% with messages = get_flashed_messages(category_filter=['insumo']) %}
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 <form action="/crear/insumo" method="post">
                     <div class="form-group">
                         <label for="nombre_in">Nombre insumo</label>
@@ -50,6 +57,15 @@
                 </form>
                 <br>
                 <h2>Gastos - compras:</h2>
+                {% with messages = get_flashed_messages(category_filter=['compras']) %}
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 <form action="/crear/compra" method="post"> <!--cambiar el action por el metodo correspondiente-->
                     <div class="form-group">
                         <label for="fecha_g">Fecha:</label>

@@ -32,6 +32,8 @@
         <div class="row">
             <div class="col-6">
                 <h2>Regístrate</h2>
+                <div id="mensajeAlerta"></div> <!-- validacion con ajax -->
+
                 <form action="/register_p" method="post">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
@@ -58,9 +60,6 @@
             </div>
             <div class="col-6">
                 <h2>Información sobre convocatorias</h2>
-                <br>
-
-                <img src="" alt=""> <!--colocar imagen informatva  <img src="{{ url_for('static', filename='static/images/img.png') }}">--> 
                 <div class="card">
                     <div class="card-header">
                     Calificanos
@@ -80,6 +79,8 @@
                             </a>
                         </div>
                     </blockquote>
+                    <br>
+                    <img src="{{ url_for('static', filename='images/cosechas.png') }}" class="img-thumbnail">
                     </div>
                 </div>
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -18,8 +18,8 @@ def crear_compra():
     
     #validacion
     if not Compra.validacion(request.form): 
-        return redirect('/crear/compra')
+        return redirect('/compras')
 
     Compra.save(request.form)
-    flash("Guardado", '/crear/compra')
+    flash("Guardado", '/compras')
     return redirect('/compras')

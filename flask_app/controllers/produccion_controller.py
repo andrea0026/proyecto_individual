@@ -21,7 +21,7 @@ def crear_registro():
     
     #validacion
     if not Produccion.validacion(request.form): 
-        return redirect('/crear/registro')
+        return redirect('/produccion')
 
     Produccion.save(request.form)
     return redirect('/produccion')

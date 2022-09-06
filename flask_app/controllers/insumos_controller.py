@@ -9,7 +9,7 @@ def crear_insumo():
     
     #validacion
     if not Insumo.valida_insumos(request.form): 
-        return redirect('/crear/insumo')
+        return redirect('/compras')
 
     Insumo.save(request.form)
     flash("Guardado", '/crear/insumo')

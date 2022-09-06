@@ -14,7 +14,7 @@ def crear_venta():
     
     #validacion
     if not Venta.validacion(request.form): 
-        return redirect('/crear/venta')
+        return redirect('/produccion')
 
     Venta.save(request.form)
     return redirect('/produccion')

@@ -23,8 +23,8 @@ def register_p():
         "telefono1": request.form['telefono1'],
         "telefono2": request.form['telefono2']
     }
-    id = Postulante.save(formulario) #Guardando a mi usuario y recibo el ID del nuevo registro
-    session['postulantes_id'] = id #Guardando en sesion el identificador
+    id = Postulante.save(formulario)
+    session['postulantes_id'] = id 
 
     return redirect('/dashboard')
 
